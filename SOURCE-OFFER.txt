@@ -1,0 +1,41 @@
+☆Star工具箱☆ — 完整对应源码书面要约（Written Offer）
+依据 GNU General Public License v3 第 6 条
+
+1. 适用对象
+   任何取得本分发包中二进制程序（StarToolbox.exe 及随附 DLL、helpers、ui 等）
+   的第三方，均享有本要约下的权利。
+   分发者不得对本要约附加额外条件。
+
+2. 提供内容
+   与本二进制对应的完整 Corresponding Source，包括：
+   (a) 上游 开物 Kaiwu v0.4.4 全部源码（tag v0.4.4 /
+       commit 576df19ed663ca8b383124c2cf32f1a31b2a5a40）；
+   (b) 本分发版对界面层的全部修改与新增文件（见 star-toolbox-changes.patch）；
+   (c) 构建脚本 build.ps1、tools/setup-dependencies.ps1 与依赖固定清单
+       tools/dependencies.json、tools/engine-source.json 等；
+   (d) 本分发包随附的可选源码补丁与构建复现说明。
+
+3. 已有的获取方式（优先，无需等待索取）
+   - 本分发包内 source/ 目录已直接包含上述 (a)(b)(c)(d)。
+   - 上游源码公开地址：https://github.com/dls0412/kaiwu/tree/v0.4.4
+   - 完整源码归档：https://github.com/dls0412/kaiwu/archive/refs/tags/v0.4.4.tar.gz
+
+4. 索取方式
+   联系人 / 下载地址：guowentian@163.com
+   亦可通过分发本包的渠道联系分发者索取实体介质副本。
+   若以实体介质提供，收费不得超过实际介质与邮寄成本，且须提供
+   机器可读格式。
+
+5. 有效期
+   自本包首次分发之日起至少三年有效（自 2026-11-13 起至 2029-11-13）。
+   在此期间，只要分发者继续分发本二进制，本要约持续有效，并可由
+   任何收到本要约的第三方继续转达。
+
+6. 许可证
+   上述源码与全部衍生改动均按 GPL-3.0-or-later 授权，许可证全文见
+   本包 LICENSE.txt。第三方组件各自许可见 THIRD-PARTY.md 与 licenses/。
+   本软件无任何担保（GPLv3 第 15、16 条）。
+
+注意：第 4 项联系方式已于 2026-11-18 填写为真实可达邮箱。同时第 3 项
+"随包附源码"（source/ 目录直接包含完整 Corresponding Source）依然有效，
+两条路径并存；即使邮箱未来失效，仍可通过随包源码满足 GPLv3 第 6 条义务。

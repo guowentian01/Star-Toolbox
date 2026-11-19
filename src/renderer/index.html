@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>☆Star工具箱☆</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <img class="mark" src="assets/icons/brand.png" alt="Star工具箱">
+      <span class="brand-name">☆Star工具箱☆</span>
+    </div>
+    <nav class="nav" id="nav">
+      <button class="nav-item active" data-view="home">首页</button>
+      <button class="nav-item" data-view="media">媒体播放</button>
+      <button class="nav-item" data-view="doc">文档编辑</button>
+      <button class="nav-item" data-view="download">下载</button>
+      <button class="nav-item" data-view="files">文件工具</button>
+    </nav>
+    <div class="top-actions">
+      <button class="icon-btn" id="btn-env" title="运行环境检测">⚙</button>
+    </div>
+  </header>
+
+  <main class="content">
+    <!-- 首页 -->
+    <section class="view active" id="view-home">
+      <div class="hero">
+        <div>
+          <p class="eyebrow">Welcome</p>
+          <h1>☆Star工具箱☆</h1>
+          <p class="lead">跨平台媒体播放与工具箱 · macOS / Windows / Linux</p>
+        </div>
+        <div class="hero-art"><img src="assets/icons/brand.png" alt="GX"></div>
+      </div>
+
+      <div class="section-head">
+        <h2>最近打开</h2>
+        <button class="link-btn" id="recent-clear">清空</button>
+      </div>
+      <div class="recent-list" id="recent-list"></div>
+      <div class="empty" id="recent-empty">还没有最近打开的文件。打开一个媒体文件即可在此快速访问。</div>
+
+      <div class="section-head"><h2>快捷入口</h2></div>
+      <div class="tile-grid">
+        <button class="tile" data-goto="media"><img class="tile-ic" src="assets/icons/media.png" alt=""><span class="tile-name">媒体播放</span><span class="tile-hint">本地视频 / 音乐，双通道播放</span></button>
+        <button class="tile" data-goto="files"><img class="tile-ic" src="assets/icons/app.png" alt=""><span class="tile-name">文件工具</span><span class="tile-hint">Excel / PDF / 图片 / 文本</span></button>
+        <button class="tile" data-goto="download"><img class="tile-ic" src="assets/icons/video-file.png" alt=""><span class="tile-name">视频下载</span><span class="tile-hint">yt-dlp 外部程序</span></button>
+        <button class="tile" id="tile-online"><img class="tile-ic" src="assets/icons/hero.png" alt=""><span class="tile-name">在线工具</span><span class="tile-hint">ffee.me · 1000+ 免费工具 ↗</span></button>
+      </div>
+    </section>
+
+    <!-- 媒体播放 -->
+    <section class="view" id="view-media">
+      <h2>媒体播放</h2>
+      <p class="muted">常见格式（mp4/webm/mp3）在窗口内播放；mkv / flac / 外挂字幕 / 流媒体 / 硬解走系统 mpv 独立窗口。首次打开大码率 HEVC/AV1 视频可选后台转 720p 缓存。</p>
+      <div class="toolbar">
+        <button class="btn primary" id="media-open">打开媒体</button>
+        <button class="btn" id="media-mpv">用 mpv 播放</button>
+        <button class="btn" id="media-transcode">转码流畅播放</button>
+        <button class="btn" id="media-clear-cache">清空转码缓存</button>
+      </div>
+      <div id="media-stage" class="media-stage">
+        <div class="stage-empty">未选择媒体文件</div>
+        <video id="player" controls playsinline></video>
+      </div>
+      <div class="status" id="media-status"></div>
+    </section>
+
+    <!-- 文档编辑 -->
+    <section class="view" id="view-doc">
+      <h2>文档编辑</h2>
+      <p class="muted">轻量文本 / Markdown 编辑，本地保存，不上传。复杂 Office 文档可用「系统打开」交给本机应用。</p>
+      <div class="toolbar">
+        <button class="btn primary" id="doc-new">新建</button>
+        <button class="btn" id="doc-open">打开文本</button>
+        <button class="btn" id="doc-save">保存</button>
+        <button class="btn" id="doc-sysopen">系统打开</button>
+      </div>
+      <div class="editor-wrap">
+        <input id="doc-path" class="path-input" placeholder="文件路径（打开或保存时自动填写）">
+        <textarea id="doc-editor" spellcheck="false" placeholder="在此编辑文本…"></textarea>
+      </div>
+      <div class="status" id="doc-status"></div>
+    </section>
+
+    <!-- 下载 -->
+    <section class="view" id="view-download">
+      <h2>视频下载</h2>
+      <p class="muted">调用系统 yt-dlp（<span id="dl-tool-state">检测中…</span>）。macOS 安装：<code>brew install yt-dlp</code></p>
+      <div class="toolbar">
+        <input id="dl-url" class="url-input" placeholder="粘贴视频地址 https://…">
+        <button class="btn primary" id="dl-start">开始下载</button>
+        <button class="btn" id="dl-audio">仅下载音频</button>
+        <button class="btn" id="dl-cancel">取消</button>
+      </div>
+      <div class="progress-wrap"><div class="progress-bar" id="dl-bar"></div></div>
+      <div class="status" id="dl-status"></div>
+      <div class="section-head"><h2>下载目录中的媒体</h2></div>
+      <div class="file-list" id="dl-list"></div>
+    </section>
+
+    <!-- 文件工具 -->
+    <section class="view" id="view-files">
+      <h2>文件工具</h2>
+
+      <div class="tool-card">
+        <div class="tool-card-head"><img class="tool-card-ic" src="assets/icons/app.png" alt=""><div><h3>Excel 按 Sheet 拆分 / 合并</h3><p>原生 OOXML 保真：字体 / 颜色 / 填充 / 数字格式 / 列宽 / 合并单元格零损，全离线。仅支持 xlsx / xlsm。</p></div></div>
+        <div class="toolbar">
+          <button class="btn primary" id="excel-split">拆分到文件夹</button>
+          <button class="btn" id="excel-merge">合并多个工作簿</button>
+          <label class="checkbox"><input type="checkbox" id="excel-prefix"> 合并时加来源文件名前缀</label>
+        </div>
+        <div class="status" id="excel-status"></div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-card-head"><img class="tool-card-ic" src="assets/icons/pdf.png" alt=""><div><h3>PDF 工具</h3><p>按页拆分、多文件合并，基于 pdf-lib。</p></div></div>
+        <div class="toolbar">
+          <button class="btn primary" id="pdf-split">按页拆分</button>
+          <button class="btn" id="pdf-merge">合并 PDF</button>
+        </div>
+        <div class="status" id="pdf-status"></div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-card-head"><img class="tool-card-ic" src="assets/icons/image.png" alt=""><div><h3>图片格式转换</h3><p>用系统自带工具（macOS sips）批量转换格式，不打包原生模块。</p></div></div>
+        <div class="toolbar">
+          <button class="btn primary" id="img-convert">选择图片并转换</button>
+          <select id="img-format" class="select"><option value="png">PNG</option><option value="jpg">JPG</option><option value="webp">WebP</option><option value="tiff">TIFF</option></select>
+        </div>
+        <div class="status" id="img-status"></div>
+      </div>
+
+      <div class="tool-card">
+        <div class="tool-card-head"><img class="tool-card-ic" src="assets/icons/text.png" alt=""><div><h3>文本处理</h3><p>去重、去空行、大小写、统计等，纯本地。</p></div></div>
+        <div class="toolbar">
+          <button class="btn" data-text="dedup">去重</button>
+          <button class="btn" data-text="trim">去空行</button>
+          <button class="btn" data-text="upper">转大写</button>
+          <button class="btn" data-text="lower">转小写</button>
+          <button class="btn" data-text="reverse">倒序</button>
+          <button class="btn primary" data-text="count">统计</button>
+        </div>
+        <textarea id="text-input" class="text-area" placeholder="输入或粘贴文本…"></textarea>
+        <div class="status" id="text-status"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>☆Star工具箱☆ · GPL-3.0-or-later · 开物 Kaiwu v0.4.4 非官方衍生版</span>
+    <span id="env-info"></span>
+  </footer>
+</div>
+<div id="toast" class="toast"></div>
+<script src="renderer.js"></script>
+</body>
+</html>
