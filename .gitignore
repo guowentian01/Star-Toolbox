@@ -5,4 +5,6 @@ dist/
 .DS_Store
 build/star.iconset/
 build/preview/
+build/macpack/
 build/*.log
+build/*.icns
