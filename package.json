@@ -64,7 +64,6 @@
     },
     "win": {
       "target": ["nsis", "portable"],
-      "arch": ["x64"],
       "icon": "build/icon.png"
     },
     "linux": {
