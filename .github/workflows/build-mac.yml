@@ -42,7 +42,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build macOS universal dmg
+      - name: Build macOS arm64 dmg
         run: npm run dist:mac
 
       - name: List artifacts
