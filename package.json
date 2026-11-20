@@ -1,0 +1,79 @@
+{
+  "name": "star-toolbox",
+  "version": "0.5.0",
+  "description": "☆Star工具箱☆ · 跨平台媒体播放与工具箱（macOS 优先 / Windows 兼容）",
+  "main": "src/main.js",
+  "license": "GPL-3.0-or-later",
+  "author": {
+    "name": "star",
+    "email": "guowentian@163.com"
+  },
+  "homepage": "https://ffee.me/zh/",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dist:mac": "electron-builder --mac --arm64 --publish never",
+    "dist:mac:arm64": "electron-builder --mac --arm64",
+    "dist:mac:x64": "electron-builder --mac --x64",
+    "dist:win": "electron-builder --win --x64",
+    "dist:linux": "electron-builder --linux --x64 --publish never",
+    "dist:linux:deb": "electron-builder --linux deb --x64 --publish never",
+    "dist:linux:appimage": "electron-builder --linux AppImage --x64 --publish never",
+    "pack:dir": "electron-builder --dir"
+  },
+  "dependencies": {
+    "jszip": "3.10.1",
+    "pdf-lib": "1.17.1"
+  },
+  "devDependencies": {
+    "electron": "45.3.1",
+    "electron-builder": "26.18.0"
+  },
+  "build": {
+    "appId": "cn.star.toolbox",
+    "productName": "StarToolbox",
+    "copyright": "Copyright © 2026 star · GPL-3.0-or-later",
+    "asar": true,
+    "files": [
+      "src/**/*",
+      "package.json",
+      "LICENSE.txt",
+      "NOTICE.md",
+      "THIRD-PARTY.md",
+      "SOURCE-OFFER.txt",
+      "licenses/**/*",
+      "README.md"
+    ],
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "category": "public.app-category.utilities",
+      "icon": "build/icon.icns",
+      "identity": null,
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false
+    },
+    "dmg": {
+      "title": "☆Star工具箱☆",
+      "writeUpdateInfo": false,
+      "contents": [
+        { "x": 130, "y": 220 },
+        { "x": 410, "y": 220, "type": "link", "path": "/Applications" }
+      ]
+    },
+    "win": {
+      "target": ["nsis", "portable"],
+      "icon": "build/icon.png"
+    },
+    "linux": {
+      "target": ["deb", "AppImage"],
+      "category": "Utility",
+      "maintainer": "star <guowentian@163.com>"
+    }
+  }
+}

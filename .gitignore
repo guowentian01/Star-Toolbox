@@ -1,0 +1,11 @@
+node_modules/
+release/
+dist/
+*.log
+.DS_Store
+build/star.iconset/
+build/preview/
+build/simulate_shots/
+build/macpack/
+build/*.log
+build/*.icns
